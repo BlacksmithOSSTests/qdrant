@@ -19,7 +19,7 @@ jobs:
     steps:
     - name: Install minimal stable
       uses: dtolnay/rust-toolchain@stable
-    - uses: useblacksmith/cache@v5
+    - uses: actions/checkout@v4
     - uses: useblacksmith/rust-cache@v3
     - name: Install Protoc
       uses: arduino/setup-protoc@v3
