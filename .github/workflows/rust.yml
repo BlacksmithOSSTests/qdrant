@@ -14,13 +14,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest ]
+        os: [ ubuntu-latest, blacksmith ]
 
     steps:
     - name: Install minimal stable
       uses: dtolnay/rust-toolchain@stable
-    - uses: actions/checkout@v4
-    - uses: Swatinem/rust-cache@v2
+    - uses: useblacksmith/cache@v5
+    - uses: useblacksmith/rust-cache@v3
     - name: Install Protoc
       uses: arduino/setup-protoc@v3
       with:
@@ -42,14 +42,14 @@ jobs:
   # and will create a GH Issue if there is a test marked as flaky,
   # Failure of updating an issue is ignored because it fails for external contributors.
   process-results:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith
     needs: test
     permissions:
       contents: read
       issues: write
     strategy:
       matrix:
-        os: [ ubuntu-latest, windows-latest, macos-latest  ]
+        os: [ ubuntu-latest, blacksmith  ]
     steps:
       - name: Download test report
         uses: actions/download-artifact@v4
